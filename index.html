@@ -4,15 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>NegociOS Pro | Sistema Operativo Comercial</title>
-  
+
+  <!-- SOPORTE OFICIAL DE ICONO EN PANTALLA DE INICIO (iOS / iPhone / iPad) -->
+  <link rel="apple-touch-icon" href="http://lemustech.net/imagenes/imagen4.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="http://lemustech.net/imagenes/imagen4.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="http://lemustech.net/imagenes/imagen4.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://lemustech.net/imagenes/imagen4.png">
+
+  <!-- SOPORTE DE ICONO EN NAVEGADORES Y ANDROID -->
+  <link rel="icon" type="image/png" sizes="192x192" href="http://lemustech.net/imagenes/imagen4.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="http://lemustech.net/imagenes/imagen4.png">
+  <link rel="shortcut icon" href="http://lemustech.net/imagenes/imagen4.png">
+
+  <!-- CAPACIDADES DE APLICACIÓN NATIVA FULLSCREEN (iOS) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NegociOS Pro">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#070b14">
+
+  <!-- MANIFEST INLINE PARA ANDROID PWA (Chrome / Samsung / Edge) -->
+  <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22NegociOS%20Pro%22%2C%22short_name%22%3A%22NegociOS%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23070b14%22%2C%22theme_color%22%3A%22%236366f1%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22http%3A%2F%2Flemustech.net%2Fimagenes%2Fimagen4.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22http%3A%2F%2Flemustech.net%2Fimagenes%2Fimagen4.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="NegociOS">
-  <meta name="theme-color" content="#070b14">
 
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -55,15 +71,15 @@
       --sab: env(safe-area-inset-bottom, 0px);
     }
 
-    body {
+    html, body {
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Plus Jakarta Sans', sans-serif;
-      padding-top: var(--sat);
-      padding-bottom: var(--sab);
       -webkit-tap-highlight-color: transparent;
       background-color: #070b14;
       color: #f1f5f9;
-      height: 100vh;
-      height: 100dvh;
+      height: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
     }
     .font-mono-code {
       font-family: 'SF Mono', 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
@@ -123,7 +139,6 @@
       touch-action: pan-x;
       scrollbar-width: none;
       -ms-overflow-style: none;
-      overscroll-behavior-x: contain;
     }
     .touch-scroll-x::-webkit-scrollbar {
       display: none;
@@ -133,11 +148,12 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       touch-action: pan-y;
-      overscroll-behavior-y: contain;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
     }
 
     .bottom-nav-safe {
-      padding-bottom: calc(4.2rem + env(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)) !important;
     }
 
     @media print {
@@ -176,21 +192,8 @@
     <div class="flex flex-col items-stretch w-full justify-start">
       <div class="flex h-16 items-center justify-between px-4 border-b border-slate-800/80">
         <div class="flex items-center gap-2.5 min-w-0">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-950 to-slate-900 border border-indigo-500/40 p-1 flex items-center justify-center shadow-lg shadow-indigo-500/30 shrink-0">
-            <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow">
-              <defs>
-                <linearGradient id="logo-neon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#4facfe" />
-                  <stop offset="50%" stop-color="#00f2fe" />
-                  <stop offset="100%" stop-color="#6366f1" />
-                </linearGradient>
-              </defs>
-              <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="url(#logo-neon-grad)" stroke-width="6" stroke-dasharray="14 8" stroke-linecap="round"/>
-              <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="50" cy="72" r="4" fill="#00f2fe" />
-              <circle cx="66" cy="72" r="4" fill="#00f2fe" />
-              <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="url(#logo-neon-grad)" filter="drop-shadow(0 0 4px #00f2fe)"/>
-            </svg>
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-950 to-slate-900 border border-indigo-500/40 p-1 flex items-center justify-center shadow-lg shadow-indigo-500/30 shrink-0 overflow-hidden">
+            <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-bolt text-cyan-400\'></i>';">
           </div>
           <div class="min-w-0">
             <div class="flex items-center gap-1.5">
@@ -287,12 +290,8 @@
   <main class="order-1 flex-1 flex flex-col min-w-0 bg-[#070b14] overflow-hidden h-[100dvh] relative">
     <header class="h-14 md:h-16 glass-panel-header px-3 md:px-6 flex items-center justify-between shrink-0 z-20">
       <div class="flex items-center gap-2.5 min-w-0">
-        <div class="md:hidden w-8 h-8 rounded-xl bg-[#0c1222] border border-indigo-500/40 p-1 flex items-center justify-center shadow-md shadow-indigo-500/30 shrink-0">
-          <svg viewBox="0 0 100 100" class="w-full h-full">
-            <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="#00f2fe" stroke-width="7" stroke-dasharray="14 8" stroke-linecap="round"/>
-            <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="#00f2fe"/>
-          </svg>
+        <div class="md:hidden w-8 h-8 rounded-xl bg-[#0c1222] border border-indigo-500/40 p-1 flex items-center justify-center shadow-md shadow-indigo-500/30 shrink-0 overflow-hidden">
+          <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-bolt text-cyan-400\'></i>';">
         </div>
         <div class="min-w-0">
           <h2 id="view-title" class="text-sm md:text-lg font-black text-white tracking-tight truncate flex items-center gap-2">
@@ -368,7 +367,7 @@
             </div>
           </div>
 
-          <div class="flex-1 min-h-0 touch-scroll-y pr-0.5 bottom-nav-safe md:pb-2">
+          <div class="flex-1 min-h-0 touch-scroll-y pr-0.5 bottom-nav-safe md:pb-2" id="catalog-scroll-container">
             <div id="pos-products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-3"></div>
           </div>
         </div>
@@ -931,12 +930,8 @@
 
       <div id="printable-counter-stand" class="p-4 border-2 border-dashed border-indigo-300 rounded-2xl bg-gradient-to-b from-indigo-50/50 to-white text-center space-y-3">
         <div class="flex items-center justify-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-slate-950 border border-slate-800 p-1 flex items-center justify-center shadow-sm shrink-0">
-            <svg viewBox="0 0 100 100" class="w-full h-full">
-              <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="#00f2fe" stroke-width="6" stroke-dasharray="14 8" stroke-linecap="round"/>
-              <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="#00f2fe"/>
-            </svg>
+          <div class="w-10 h-10 rounded-2xl bg-slate-950 border border-slate-800 p-1 flex items-center justify-center shadow-sm shrink-0 overflow-hidden">
+            <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-bolt text-cyan-400\'></i>';">
           </div>
           <h2 class="font-black text-lg text-slate-900" id="stand-business-name">NEGOCIOS | TERMINAL COMERCIAL</h2>
         </div>
@@ -1079,12 +1074,8 @@
 
   <div id="modal-lock-screen" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-50 hidden items-center justify-center p-4">
     <div class="text-center space-y-3 max-w-xs w-full">
-      <div class="w-14 h-14 rounded-2xl bg-[#0c1222] border border-indigo-500/50 p-2 mx-auto flex items-center justify-center shadow-lg shadow-indigo-500/40 animate-pulse">
-        <svg viewBox="0 0 100 100" class="w-full h-full">
-          <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="#00f2fe" stroke-width="6" stroke-dasharray="14 8"/>
-          <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="5"/>
-          <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="#00f2fe"/>
-        </svg>
+      <div class="w-14 h-14 rounded-2xl bg-[#0c1222] border border-indigo-500/50 p-2 mx-auto flex items-center justify-center shadow-lg shadow-indigo-500/40 animate-pulse overflow-hidden">
+        <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-lock text-cyan-400 text-xl\'></i>';">
       </div>
       <div>
         <h3 class="text-lg font-black text-white">Terminal Protegida</h3>
@@ -1099,12 +1090,8 @@
 
   <div id="modal-receipt" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden items-center justify-center p-3 overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-sm w-full p-4 shadow-2xl border border-slate-100 my-4 text-center">
-      <div class="w-12 h-12 rounded-2xl bg-slate-950 border border-slate-800 p-1.5 mx-auto flex items-center justify-center mb-1">
-        <svg viewBox="0 0 100 100" class="w-full h-full">
-          <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="#00f2fe" stroke-width="6" stroke-dasharray="14 8"/>
-          <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="5"/>
-          <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="#00f2fe"/>
-        </svg>
+      <div class="w-12 h-12 rounded-2xl bg-slate-950 border border-slate-800 p-1.5 mx-auto flex items-center justify-center mb-1 overflow-hidden">
+        <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-bolt text-cyan-400 text-lg\'></i>';">
       </div>
       <h4 class="font-black text-slate-800 text-sm">Operación Procesada</h4>
       <p class="text-[10px] text-slate-400" id="receipt-subtitle-text">Registro validado mediante sello criptográfico</p>
@@ -1730,26 +1717,8 @@
       invoiceFooter: 'Comprobante de compra validado. ¡Gracias por su preferencia!'
     };
 
-    let customers = [
-      { id: 'c1', name: 'Carlos Mendoza', doc: 'V-18765432', phone: '04121234567', debtUSD: 4.50, ordersCount: 8, lastPurchase: 'Hoy 10:15 AM' },
-      { id: 'c2', name: 'María Gómez', doc: 'V-22345678', phone: '04149876543', debtUSD: 0.00, ordersCount: 4, lastPurchase: 'Ayer' },
-      { id: 'c3', name: 'Alejandro Ramos', doc: 'V-14890123', phone: '04245558899', debtUSD: 8.20, ordersCount: 12, lastPurchase: 'Hoy 11:30 AM' }
-    ];
-
-    let products = [
-      { id: '1', name: 'Café Guayoyo / Americano', barcode: '7591001', category: 'Cafetería', price: 1.00, stock: 45, icon: 'fa-mug-hot', image: null, tag: 'ALTA DEMANDA' },
-      { id: '2', name: 'Café con Leche / Capuccino', barcode: '7591002', category: 'Cafetería', price: 1.50, stock: 32, icon: 'fa-mug-hot', image: null, tag: '' },
-      { id: '3', name: 'Empanada de Carne Mechada', barcode: '7591003', category: 'Desayunos', price: 1.25, stock: 18, icon: 'fa-burger', image: null, tag: 'FRESCO' },
-      { id: '4', name: 'Empanada de Queso Blanco', barcode: '7591004', category: 'Desayunos', price: 1.00, stock: 12, icon: 'fa-burger', image: null, tag: '' },
-      { id: '5', name: 'Croissant Jamón & Queso', barcode: '7591005', category: 'Desayunos', price: 2.50, stock: 4, icon: 'fa-bread-slice', image: null, tag: 'CRÍTICO' },
-      { id: '6', name: 'Refresco Coca-Cola 355ml', barcode: '7591006', category: 'Bebidas', price: 1.50, stock: 24, icon: 'fa-bottle-water', image: null, tag: '' },
-      { id: '7', name: 'Agua Mineral 500ml', barcode: '7591007', category: 'Bebidas', price: 0.80, stock: 40, icon: 'fa-bottle-water', image: null, tag: '' },
-      { id: '8', name: 'Malta Polar Fría', barcode: '7591008', category: 'Bebidas', price: 1.20, stock: 15, icon: 'fa-bottle-water', image: null, tag: '' },
-      { id: '9', name: 'Galleta con Chispas', barcode: '7591009', category: 'Dulces', price: 0.75, stock: 2, icon: 'fa-cookie-bite', image: null, tag: 'PROMOCIÓN' },
-      { id: '10', name: 'Harina PAN 1Kg', barcode: '7591010', category: 'Bodega', price: 1.20, stock: 25, icon: 'fa-box', image: null, tag: '' },
-      { id: '11', name: 'Arroz Blanco 1Kg', barcode: '7591011', category: 'Bodega', price: 1.10, stock: 30, icon: 'fa-box', image: null, tag: '' }
-    ];
-
+    let customers = [];
+    let products = [];
     let salesHistory = [];
     let db = null;
     let auth = null;
@@ -2041,20 +2010,6 @@
     let deferredPrompt = null;
 
     function initPWASupport() {
-      const manifest = {
-        name: "NegociOS Pro",
-        short_name: "NegociOS",
-        start_url: window.location.href,
-        display: "standalone",
-        background_color: "#070b14",
-        theme_color: "#6366f1"
-      };
-      const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-      const link = document.createElement('link');
-      link.rel = 'manifest';
-      link.href = URL.createObjectURL(blob);
-      document.head.appendChild(link);
-
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
@@ -2399,9 +2354,12 @@
 
       if (filtered.length === 0) {
         grid.innerHTML = `
-          <div class="col-span-full py-10 text-center text-slate-500">
-            <i class="fa-solid fa-magnifying-glass text-2xl text-slate-600 mb-1.5"></i>
-            <p class="font-bold text-xs text-slate-400">Sin coincidencias en catálogo</p>
+          <div class="col-span-full py-12 text-center text-slate-500">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto mb-2 text-slate-600">
+              <i class="fa-solid fa-box-open text-xl"></i>
+            </div>
+            <p class="font-bold text-xs text-slate-300">Catálogo Vacío</p>
+            <p class="text-[10px] text-slate-500 mt-0.5">Ingresa a Inventario para registrar tus primeros artículos</p>
           </div>
         `;
         return;
