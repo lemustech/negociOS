@@ -5,26 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>NegociOS Pro | Sistema Operativo Comercial</title>
 
-  <!-- SOPORTE OFICIAL DE ICONO EN PANTALLA DE INICIO (iOS / iPhone / iPad) -->
-  <link rel="apple-touch-icon" href="http://lemustech.net/imagenes/imagen4.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="http://lemustech.net/imagenes/imagen4.png">
-  <link rel="apple-touch-icon" sizes="167x167" href="http://lemustech.net/imagenes/imagen4.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="http://lemustech.net/imagenes/imagen4.png">
+  <link rel="apple-touch-icon" href="https://lemustech.net/imagenes/imagen4.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://lemustech.net/imagenes/imagen4.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="https://lemustech.net/imagenes/imagen4.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://lemustech.net/imagenes/imagen4.png">
 
-  <!-- SOPORTE DE ICONO EN NAVEGADORES Y ANDROID -->
-  <link rel="icon" type="image/png" sizes="192x192" href="http://lemustech.net/imagenes/imagen4.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="http://lemustech.net/imagenes/imagen4.png">
-  <link rel="shortcut icon" href="http://lemustech.net/imagenes/imagen4.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://lemustech.net/imagenes/imagen4.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="https://lemustech.net/imagenes/imagen4.png">
+  <link rel="shortcut icon" href="https://lemustech.net/imagenes/imagen4.png">
 
-  <!-- CAPACIDADES DE APLICACIÓN NATIVA FULLSCREEN (iOS) -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="NegociOS Pro">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#070b14">
 
-  <!-- MANIFEST INLINE PARA ANDROID PWA (Chrome / Samsung / Edge) -->
-  <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22NegociOS%20Pro%22%2C%22short_name%22%3A%22NegociOS%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23070b14%22%2C%22theme_color%22%3A%22%236366f1%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22http%3A%2F%2Flemustech.net%2Fimagenes%2Fimagen4.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22http%3A%2F%2Flemustech.net%2Fimagenes%2Fimagen4.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+  <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22NegociOS%20Pro%22%2C%22short_name%22%3A%22NegociOS%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23070b14%22%2C%22theme_color%22%3A%22%236366f1%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Flemustech.net%2Fimagenes%2Fimagen4.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Flemustech.net%2Fimagenes%2Fimagen4.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -71,16 +67,23 @@
       --sab: env(safe-area-inset-bottom, 0px);
     }
 
-    html, body {
+    html {
+      height: 100%;
+      height: -webkit-fill-available;
+    }
+
+    body {
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Plus Jakarta Sans', sans-serif;
       -webkit-tap-highlight-color: transparent;
       background-color: #070b14;
       color: #f1f5f9;
       height: 100%;
-      min-height: 100%;
+      height: -webkit-fill-available;
       margin: 0;
       padding: 0;
+      overscroll-behavior-y: none;
     }
+
     .font-mono-code {
       font-family: 'SF Mono', 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
     }
@@ -145,15 +148,23 @@
     }
 
     .touch-scroll-y {
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      touch-action: pan-y;
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-y !important;
+      overscroll-behavior-y: contain;
+      will-change: scroll-position;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
 
     .bottom-nav-safe {
       padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    .brand-logo-svg {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     @media print {
@@ -186,14 +197,21 @@
     }
   </style>
 </head>
-<body class="bg-[#070b14] text-slate-100 h-screen w-screen flex flex-col md:flex-row overflow-hidden select-none antialiased">
+<body class="bg-[#070b14] text-slate-100 flex flex-col md:flex-row select-none antialiased h-full overflow-hidden">
 
   <aside class="hidden md:flex order-2 md:order-1 w-64 bg-[#0a0f1d] text-white flex-col justify-between shrink-0 shadow-2xl z-30 border-r border-slate-800/80 h-full">
     <div class="flex flex-col items-stretch w-full justify-start">
       <div class="flex h-16 items-center justify-between px-4 border-b border-slate-800/80">
         <div class="flex items-center gap-2.5 min-w-0">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-950 to-slate-900 border border-indigo-500/40 p-1 flex items-center justify-center shadow-lg shadow-indigo-500/30 shrink-0 overflow-hidden">
-            <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-bolt text-cyan-400\'></i>';">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900/80 border border-indigo-500/40 p-1 flex items-center justify-center shadow-lg shadow-indigo-500/30 shrink-0 overflow-hidden relative">
+            <img src="https://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain relative z-10" onerror="handleLogoError(this)">
+            <div class="brand-fallback-logo hidden absolute inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-600 via-indigo-700 to-cyan-600 text-white">
+              <svg viewBox="0 0 40 40" class="w-6 h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="2" stroke-dasharray="2 2" class="text-cyan-300"/>
+                <path d="M14 26V14L22 14C24.2 14 26 15.8 26 18C26 20.2 24.2 22 22 22H14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M25 12L19 22H27L21 28" fill="#38bdf8"/>
+              </svg>
+            </div>
           </div>
           <div class="min-w-0">
             <div class="flex items-center gap-1.5">
@@ -287,11 +305,17 @@
     </div>
   </aside>
 
-  <main class="order-1 flex-1 flex flex-col min-w-0 bg-[#070b14] overflow-hidden h-[100dvh] relative">
+  <main class="order-1 flex-1 flex flex-col min-w-0 bg-[#070b14] h-full overflow-hidden relative">
     <header class="h-14 md:h-16 glass-panel-header px-3 md:px-6 flex items-center justify-between shrink-0 z-20">
       <div class="flex items-center gap-2.5 min-w-0">
-        <div class="md:hidden w-8 h-8 rounded-xl bg-[#0c1222] border border-indigo-500/40 p-1 flex items-center justify-center shadow-md shadow-indigo-500/30 shrink-0 overflow-hidden">
-          <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-bolt text-cyan-400\'></i>';">
+        <div class="md:hidden w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900/80 border border-indigo-500/40 p-1 flex items-center justify-center shadow-md shadow-indigo-500/30 shrink-0 overflow-hidden relative">
+          <img src="https://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain relative z-10" onerror="handleLogoError(this)">
+          <div class="brand-fallback-logo hidden absolute inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-600 via-indigo-700 to-cyan-600 text-white">
+            <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 26V14L22 14C24.2 14 26 15.8 26 18C26 20.2 24.2 22 22 22H14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M25 12L19 22H27L21 28" fill="#38bdf8"/>
+            </svg>
+          </div>
         </div>
         <div class="min-w-0">
           <h2 id="view-title" class="text-sm md:text-lg font-black text-white tracking-tight truncate flex items-center gap-2">
@@ -930,8 +954,11 @@
 
       <div id="printable-counter-stand" class="p-4 border-2 border-dashed border-indigo-300 rounded-2xl bg-gradient-to-b from-indigo-50/50 to-white text-center space-y-3">
         <div class="flex items-center justify-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-slate-950 border border-slate-800 p-1 flex items-center justify-center shadow-sm shrink-0 overflow-hidden">
-            <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-bolt text-cyan-400\'></i>';">
+          <div class="w-10 h-10 rounded-2xl bg-slate-950 border border-slate-800 p-1 flex items-center justify-center shadow-sm shrink-0 overflow-hidden relative">
+            <img src="https://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain relative z-10" onerror="handleLogoError(this)">
+            <div class="brand-fallback-logo hidden absolute inset-0 flex items-center justify-center bg-indigo-600 text-white">
+              <svg viewBox="0 0 40 40" class="w-6 h-6" fill="none"><path d="M14 26V14L22 14C24.2 14 26 15.8 26 18C26 20.2 24.2 22 22 22H14" stroke="white" stroke-width="2.5"/><path d="M25 12L19 22H27L21 28" fill="#38bdf8"/></svg>
+            </div>
           </div>
           <h2 class="font-black text-lg text-slate-900" id="stand-business-name">NEGOCIOS | TERMINAL COMERCIAL</h2>
         </div>
@@ -1074,8 +1101,11 @@
 
   <div id="modal-lock-screen" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-50 hidden items-center justify-center p-4">
     <div class="text-center space-y-3 max-w-xs w-full">
-      <div class="w-14 h-14 rounded-2xl bg-[#0c1222] border border-indigo-500/50 p-2 mx-auto flex items-center justify-center shadow-lg shadow-indigo-500/40 animate-pulse overflow-hidden">
-        <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-lock text-cyan-400 text-xl\'></i>';">
+      <div class="w-14 h-14 rounded-2xl bg-[#0c1222] border border-indigo-500/50 p-2 mx-auto flex items-center justify-center shadow-lg shadow-indigo-500/40 animate-pulse overflow-hidden relative">
+        <img src="https://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain relative z-10" onerror="handleLogoError(this)">
+        <div class="brand-fallback-logo hidden absolute inset-0 flex items-center justify-center bg-indigo-600 text-white">
+          <svg viewBox="0 0 40 40" class="w-8 h-8" fill="none"><path d="M14 26V14L22 14C24.2 14 26 15.8 26 18C26 20.2 24.2 22 22 22H14" stroke="white" stroke-width="2.5"/><path d="M25 12L19 22H27L21 28" fill="#38bdf8"/></svg>
+        </div>
       </div>
       <div>
         <h3 class="text-lg font-black text-white">Terminal Protegida</h3>
@@ -1090,8 +1120,11 @@
 
   <div id="modal-receipt" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden items-center justify-center p-3 overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-sm w-full p-4 shadow-2xl border border-slate-100 my-4 text-center">
-      <div class="w-12 h-12 rounded-2xl bg-slate-950 border border-slate-800 p-1.5 mx-auto flex items-center justify-center mb-1 overflow-hidden">
-        <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-bolt text-cyan-400 text-lg\'></i>';">
+      <div class="w-12 h-12 rounded-2xl bg-slate-950 border border-slate-800 p-1.5 mx-auto flex items-center justify-center mb-1 overflow-hidden relative">
+        <img src="https://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain relative z-10" onerror="handleLogoError(this)">
+        <div class="brand-fallback-logo hidden absolute inset-0 flex items-center justify-center bg-slate-900 text-cyan-400">
+          <svg viewBox="0 0 40 40" class="w-7 h-7" fill="none"><path d="M14 26V14L22 14C24.2 14 26 15.8 26 18C26 20.2 24.2 22 22 22H14" stroke="white" stroke-width="2.5"/><path d="M25 12L19 22H27L21 28" fill="#38bdf8"/></svg>
+        </div>
       </div>
       <h4 class="font-black text-slate-800 text-sm">Operación Procesada</h4>
       <p class="text-[10px] text-slate-400" id="receipt-subtitle-text">Registro validado mediante sello criptográfico</p>
@@ -1529,7 +1562,40 @@
   </div>
 
   <script>
-    const DEFAULT_FIREBASE_CONFIG = {
+    let currentTenantId = localStorage.getItem('negocios_active_tenant') || 'tienda_principal';
+    let currentTenantName = localStorage.getItem('negocios_tenant_name') || 'NegociOS | Terminal Comercial';
+    let exchangeRate = parseFloat(localStorage.getItem('negocios_rate')) || 890.00;
+    let products = [];
+    let customers = [];
+    let salesHistory = [];
+    let expenses = [];
+    let cart = [];
+    let cartDiscountPercent = 0;
+    let selectedCustomerId = 'guest';
+    let currentCategory = 'ALL';
+    let lastActiveSale = null;
+    let isMasterAuthenticated = false;
+    let pendingProtectedTab = null;
+    let masterPinHash = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+    let licenseState = { active: true, plan: 'Corporativo Pro', expiryDate: 'Ilimitada' };
+
+    let paymentSettings = {
+      bank: '0134 - Banesco',
+      bankCode: '0134',
+      id: 'V-24.123.456',
+      phone: '0412-1234567',
+      businessName: 'NegociOS | Terminal Comercial',
+      binance: '519506837',
+      binanceUser: 'Llemus43',
+      binanceEmail: 'llemus1217@gmail.com',
+      invoiceFooter: 'Comprobante de compra validado. ¡Gracias por su preferencia!'
+    };
+
+    let db = null;
+    let auth = null;
+    let unsubs = [];
+
+    const firebaseConfig = {
       apiKey: "AIzaSyDjAL_NCVSFoNu5I0UZQdYqF_mMkdAi_YM",
       authDomain: "negocios-738ec.firebaseapp.com",
       projectId: "negocios-738ec",
@@ -1538,25 +1604,33 @@
       appId: "1:104562134388:web:66dc8065a7eb200519f021"
     };
 
-    let currentTenantId = localStorage.getItem('negocios_active_tenant') || 'tienda_principal';
-    let currentTenantName = localStorage.getItem('negocios_tenant_name') || 'NegociOS | Terminal Comercial';
-    let licenseState = {
-      active: true,
-      plan: 'Corporativo Pro',
-      expiryDate: null
-    };
+    function initFirebaseClient() {
+      try {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
+        db = firebase.firestore();
+        auth = firebase.auth();
+
+        db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
+        updateCloudStatusBadge(true);
+        listenToFirestoreCollections();
+        checkTenantSubscription();
+      } catch (err) {
+        updateCloudStatusBadge(false);
+      }
+    }
 
     const CryptoGuard = {
-      async sha256(str) {
-        const enc = new TextEncoder();
-        const hashBuf = await crypto.subtle.digest('SHA-256', enc.encode(str));
-        const hashArr = Array.from(new Uint8Array(hashBuf));
-        return hashArr.map(b => b.toString(16).padStart(2, '0')).join('');
+      async sha256(message) {
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
       },
-
-      async deriveKey(password, salt) {
+      async getKey(password) {
         const enc = new TextEncoder();
-        const baseKey = await crypto.subtle.importKey(
+        const keyMaterial = await crypto.subtle.importKey(
           'raw',
           enc.encode(password),
           { name: 'PBKDF2' },
@@ -1566,196 +1640,128 @@
         return crypto.subtle.deriveKey(
           {
             name: 'PBKDF2',
-            salt: salt,
+            salt: enc.encode('negocios_salt_2026'),
             iterations: 100000,
             hash: 'SHA-256'
           },
-          baseKey,
+          keyMaterial,
           { name: 'AES-GCM', length: 256 },
           false,
           ['encrypt', 'decrypt']
         );
       },
-
-      async encryptPayload(plainObj, password) {
-        const enc = new TextEncoder();
-        const salt = crypto.getRandomValues(new Uint8Array(16));
+      async encryptPayload(obj, password) {
+        const key = await this.getKey(password);
         const iv = crypto.getRandomValues(new Uint8Array(12));
-        const key = await this.deriveKey(password, salt);
-        const encoded = enc.encode(JSON.stringify(plainObj));
-
-        const ciphertext = await crypto.subtle.encrypt(
-          { name: 'AES-GCM', iv: iv },
-          key,
-          encoded
-        );
-
+        const encoded = new TextEncoder().encode(JSON.stringify(obj));
+        const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoded);
         return JSON.stringify({
-          v: 1,
-          salt: Array.from(salt),
           iv: Array.from(iv),
-          data: Array.from(new Uint8Array(ciphertext))
+          data: Array.from(new Uint8Array(encrypted))
         });
       },
-
-      async decryptPayload(encryptedJsonStr, password) {
-        const pack = JSON.parse(encryptedJsonStr);
-        const salt = new Uint8Array(pack.salt);
-        const iv = new Uint8Array(pack.iv);
-        const data = new Uint8Array(pack.data);
-        const key = await this.deriveKey(password, salt);
-
-        const decryptedBuf = await crypto.subtle.decrypt(
-          { name: 'AES-GCM', iv: iv },
-          key,
-          data
-        );
-        const dec = new TextDecoder();
-        return JSON.parse(dec.decode(decryptedBuf));
+      async decryptPayload(jsonString, password) {
+        const bundle = JSON.parse(jsonString);
+        const key = await this.getKey(password);
+        const iv = new Uint8Array(bundle.iv);
+        const data = new Uint8Array(bundle.data);
+        const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+        return JSON.parse(new TextDecoder().decode(decrypted));
       }
     };
 
-    function sanitize(str) {
-      if (typeof str !== 'string') return str;
-      return str.replace(/[&<>"']/g, function(m) {
-        return {
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#039;'
-        }[m];
-      });
-    }
-
     const SoundEngine = {
       ctx: null,
-      init() {
+      getCtx() {
         if (!this.ctx) {
           const AudioContext = window.AudioContext || window.webkitAudioContext;
           if (AudioContext) this.ctx = new AudioContext();
         }
-        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+        return this.ctx;
       },
       playPop() {
         try {
-          this.init();
-          if (!this.ctx) return;
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
+          const ctx = this.getCtx();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(520, this.ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(840, this.ctx.currentTime + 0.08);
-          gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+          osc.frequency.setValueAtTime(540, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(840, ctx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.2, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
           osc.connect(gain);
-          gain.connect(this.ctx.destination);
+          gain.connect(ctx.destination);
           osc.start();
-          osc.stop(this.ctx.currentTime + 0.08);
+          osc.stop(ctx.currentTime + 0.08);
         } catch (e) {}
       },
       playCashRegister() {
         try {
-          this.init();
-          if (!this.ctx) return;
-          const now = this.ctx.currentTime;
-          [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, i) => {
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(freq, now + i * 0.05);
-            gain.gain.setValueAtTime(0.18, now + i * 0.05);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.05 + 0.18);
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start(now + i * 0.05);
-            osc.stop(now + i * 0.05 + 0.18);
-          });
+          const ctx = this.getCtx();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          const osc1 = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc1.type = 'triangle';
+          osc2.type = 'sine';
+          osc1.frequency.setValueAtTime(987.77, now);
+          osc2.frequency.setValueAtTime(1318.51, now + 0.08);
+
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+          osc1.connect(gain);
+          osc2.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc1.start(now);
+          osc1.stop(now + 0.12);
+          osc2.start(now + 0.08);
+          osc2.stop(now + 0.35);
         } catch (e) {}
       },
       playRemove() {
         try {
-          this.init();
-          if (!this.ctx) return;
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
+          const ctx = this.getCtx();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(320, this.ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(140, this.ctx.currentTime + 0.08);
-          gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+          osc.frequency.setValueAtTime(420, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.09);
+          gain.gain.setValueAtTime(0.2, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.09);
           osc.connect(gain);
-          gain.connect(this.ctx.destination);
+          gain.connect(ctx.destination);
           osc.start();
-          osc.stop(this.ctx.currentTime + 0.08);
+          osc.stop(ctx.currentTime + 0.09);
         } catch (e) {}
       }
     };
 
-    let masterPinHash = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
-    let isMasterAuthenticated = true;
-    let pendingProtectedTab = null;
+    function sanitize(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
 
-    let exchangeRate = 890.00;
-    let currentCategory = 'ALL';
-    let cart = [];
-    let cartDiscountPercent = 0;
-    let lastActiveSale = null;
-    let selectedCustomerId = 'guest';
-
-    let expenses = [];
-
-    let paymentSettings = {
-      bank: '0102 - Banco de Venezuela',
-      bankCode: '0102',
-      id: 'V-24.123.456',
-      phone: '04121234567',
-      businessName: 'NegociOS | Terminal Comercial',
-      binance: '519506837',
-      binanceUser: 'Llemus43',
-      binanceEmail: 'llemus1217@gmail.com',
-      invoiceFooter: 'Comprobante de compra validado. ¡Gracias por su preferencia!'
-    };
-
-    let customers = [];
-    let products = [];
-    let salesHistory = [];
-    let db = null;
-    let auth = null;
-    let isFirebaseActive = false;
-    let unsubs = [];
-
-    function initFirebaseClient() {
-      let config = DEFAULT_FIREBASE_CONFIG;
-      const storedConfig = localStorage.getItem('negocios_firebase_config');
-      if (storedConfig) {
-        try {
-          const parsed = JSON.parse(storedConfig);
-          if (parsed && parsed.apiKey) config = parsed;
-        } catch (e) {}
-      }
-
-      try {
-        if (!firebase.apps.length) {
-          firebase.initializeApp(config);
-        }
-        db = firebase.firestore();
-        auth = firebase.auth();
-
-        auth.onAuthStateChanged((user) => {
-          if (!user) {
-            auth.signInAnonymously().catch(e => console.warn('Sesión anónima iniciada'));
-          }
-        });
-
-        db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
-
-        isFirebaseActive = true;
-        updateCloudStatusBadge(true);
-        listenToFirestoreCollections();
-        checkTenantSubscription();
-      } catch (e) {
-        updateCloudStatusBadge(false);
+    function handleLogoError(imgEl) {
+      if (!imgEl) return;
+      imgEl.classList.add('hidden');
+      const parent = imgEl.parentElement;
+      if (parent) {
+        const fallback = parent.querySelector('.brand-fallback-logo');
+        if (fallback) fallback.classList.remove('hidden');
       }
     }
 
