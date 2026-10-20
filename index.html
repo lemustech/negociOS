@@ -14,12 +14,6 @@
   <meta name="apple-mobile-web-app-title" content="NegociOS">
   <meta name="theme-color" content="#070b14">
 
-  <link rel="icon" type="image/png" href="http://lemustech.net/imagenes/imagen4.png">
-  <link rel="apple-touch-icon" href="http://lemustech.net/imagenes/imagen4.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="http://lemustech.net/imagenes/imagen4.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="http://lemustech.net/imagenes/imagen4.png">
-  <link rel="apple-touch-icon" sizes="167x167" href="http://lemustech.net/imagenes/imagen4.png">
-
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
@@ -62,15 +56,17 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Plus Jakarta Sans', sans-serif;
       padding-top: var(--sat);
       padding-bottom: var(--sab);
       -webkit-tap-highlight-color: transparent;
       background-color: #070b14;
       color: #f1f5f9;
+      height: 100vh;
+      height: 100dvh;
     }
     .font-mono-code {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'SF Mono', 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
     }
     
     .glass-neon-card {
@@ -81,13 +77,8 @@
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
-    .glass-neon-active {
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.25);
-    }
-
     .glass-panel-header {
-      background: rgba(10, 15, 29, 0.88);
+      background: rgba(10, 15, 29, 0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -115,11 +106,6 @@
     .product-card {
       transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .product-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(99, 102, 241, 0.5);
-      box-shadow: 0 12px 25px -8px rgba(79, 70, 229, 0.35);
-    }
     .product-card:active {
       transform: scale(0.96);
     }
@@ -131,18 +117,27 @@
       transform: scale(0.95);
     }
 
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    .touch-scroll-x {
+      overflow-x: auto;
       -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
       overscroll-behavior-x: contain;
     }
+    .touch-scroll-x::-webkit-scrollbar {
+      display: none;
+    }
 
-    .smooth-scroll-x {
-      scroll-behavior: smooth;
+    .touch-scroll-y {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+      overscroll-behavior-y: contain;
+    }
+
+    .bottom-nav-safe {
+      padding-bottom: calc(4.2rem + env(safe-area-inset-bottom, 0px));
     }
 
     @media print {
@@ -159,7 +154,7 @@
         width: 78mm;
         margin: 0;
         padding: 4mm;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: monospace;
         font-size: 11px;
         color: black !important;
         background: white !important;
@@ -177,79 +172,87 @@
 </head>
 <body class="bg-[#070b14] text-slate-100 h-screen w-screen flex flex-col md:flex-row overflow-hidden select-none antialiased">
 
-  <aside class="order-2 md:order-1 w-full md:w-64 bg-[#0a0f1d] text-white flex md:flex-col justify-between shrink-0 shadow-2xl z-30 border-t md:border-t-0 md:border-r border-slate-800/80 h-16 md:h-full">
-    <div class="flex md:flex-col items-center md:items-stretch w-full justify-around md:justify-start">
-      <div class="hidden md:flex h-16 items-center justify-between px-4 border-b border-slate-800/80">
-        <div class="flex items-center gap-3 min-w-0">
-          <div class="w-10 h-10 rounded-2xl bg-[#0c1222] border border-indigo-500/40 p-1 flex items-center justify-center shadow-lg shadow-indigo-500/30 shrink-0 overflow-hidden">
-            <img src="http://lemustech.net/imagenes/imagen4.png" alt="NegociOS Logo" class="w-full h-full object-contain">
+  <aside class="hidden md:flex order-2 md:order-1 w-64 bg-[#0a0f1d] text-white flex-col justify-between shrink-0 shadow-2xl z-30 border-r border-slate-800/80 h-full">
+    <div class="flex flex-col items-stretch w-full justify-start">
+      <div class="flex h-16 items-center justify-between px-4 border-b border-slate-800/80">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-950 to-slate-900 border border-indigo-500/40 p-1 flex items-center justify-center shadow-lg shadow-indigo-500/30 shrink-0">
+            <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow">
+              <defs>
+                <linearGradient id="logo-neon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#4facfe" />
+                  <stop offset="50%" stop-color="#00f2fe" />
+                  <stop offset="100%" stop-color="#6366f1" />
+                </linearGradient>
+              </defs>
+              <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="url(#logo-neon-grad)" stroke-width="6" stroke-dasharray="14 8" stroke-linecap="round"/>
+              <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="50" cy="72" r="4" fill="#00f2fe" />
+              <circle cx="66" cy="72" r="4" fill="#00f2fe" />
+              <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="url(#logo-neon-grad)" filter="drop-shadow(0 0 4px #00f2fe)"/>
+            </svg>
           </div>
           <div class="min-w-0">
             <div class="flex items-center gap-1.5">
-              <h1 class="font-black text-lg tracking-tight leading-none text-white">Negoci<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-300 to-fuchsia-400">OS</span></h1>
-              <span id="cloud-status-badge" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400 animate-pulse" title="Servidor Activo"></span>
+              <span class="font-black text-lg tracking-tight text-white font-sans">Negoci<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400 font-extrabold">OS</span></span>
+              <span id="cloud-status-badge" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400 animate-pulse"></span>
             </div>
-            <p id="store-title-badge" class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider truncate mt-0.5">Terminal Comercial</p>
+            <p id="store-title-badge" class="text-[9px] text-cyan-400 font-bold uppercase tracking-wider truncate">Terminal Comercial</p>
           </div>
         </div>
       </div>
 
-      <nav class="flex md:flex-col items-center justify-around md:justify-start w-full p-1.5 md:p-3 md:space-y-1.5">
-        <button onclick="switchTab('pos')" id="tab-btn-pos" class="nav-item btn-press flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 px-3 py-1.5 md:py-2.5 rounded-2xl font-bold text-[10px] md:text-xs transition-all bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-lg shadow-indigo-600/40 flex-1 md:flex-none border border-indigo-400/30">
-          <i class="fa-solid fa-cash-register text-amber-300 text-base md:w-5 text-center"></i>
+      <nav class="flex flex-col items-stretch w-full p-3 space-y-1.5">
+        <button onclick="switchTab('pos')" id="tab-btn-pos" class="nav-item btn-press flex items-center justify-start gap-3 px-3 py-2.5 rounded-2xl font-bold text-xs transition-all bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-lg shadow-indigo-600/40 border border-indigo-400/30">
+          <i class="fa-solid fa-cash-register text-amber-300 text-base w-5 text-center"></i>
           <span class="truncate">Terminal POS</span>
         </button>
 
-        <button onclick="requireAdminAuth('inventory')" id="tab-btn-inventory" class="nav-item btn-press flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 px-3 py-1.5 md:py-2.5 rounded-2xl font-semibold text-[10px] md:text-xs transition-all text-slate-400 hover:text-cyan-300 hover:bg-slate-900/80 border border-transparent flex-1 md:flex-none relative">
-          <i class="fa-solid fa-layer-group text-base md:w-5 text-center text-cyan-400"></i>
+        <button onclick="requireAdminAuth('inventory')" id="tab-btn-inventory" class="nav-item btn-press flex items-center justify-start gap-3 px-3 py-2.5 rounded-2xl font-semibold text-xs transition-all text-slate-400 hover:text-cyan-300 hover:bg-slate-900/80 border border-transparent relative">
+          <i class="fa-solid fa-layer-group text-base w-5 text-center text-cyan-400"></i>
           <span class="truncate">Inventario</span>
-          <span id="badge-low-stock" class="hidden absolute top-1 right-2 md:static md:inline-block md:ml-auto bg-amber-500/20 text-amber-300 text-[9px] px-1.5 py-0.2 rounded-full font-bold border border-amber-500/40">0</span>
+          <span id="badge-low-stock" class="hidden ml-auto bg-amber-500/20 text-amber-300 text-[9px] px-1.5 py-0.2 rounded-full font-bold border border-amber-500/40">0</span>
         </button>
 
-        <button onclick="requireAdminAuth('credit-book')" id="tab-btn-credit-book" class="nav-item btn-press flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 px-3 py-1.5 md:py-2.5 rounded-2xl font-semibold text-[10px] md:text-xs transition-all text-slate-400 hover:text-rose-300 hover:bg-slate-900/80 border border-transparent flex-1 md:flex-none relative">
-          <i class="fa-solid fa-file-invoice-dollar text-base md:w-5 text-center text-rose-400"></i>
+        <button onclick="requireAdminAuth('credit-book')" id="tab-btn-credit-book" class="nav-item btn-press flex items-center justify-start gap-3 px-3 py-2.5 rounded-2xl font-semibold text-xs transition-all text-slate-400 hover:text-rose-300 hover:bg-slate-900/80 border border-transparent relative">
+          <i class="fa-solid fa-file-invoice-dollar text-base w-5 text-center text-rose-400"></i>
           <span class="truncate">Cuentas por Cobrar</span>
-          <span id="badge-debt-count" class="hidden absolute top-1 right-2 md:static md:inline-block md:ml-auto bg-rose-500/20 text-rose-300 text-[9px] px-1.5 py-0.2 rounded-full font-bold border border-rose-500/40">0</span>
+          <span id="badge-debt-count" class="hidden ml-auto bg-rose-500/20 text-rose-300 text-[9px] px-1.5 py-0.2 rounded-full font-bold border border-rose-500/40">0</span>
         </button>
 
-        <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="nav-item btn-press flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 px-3 py-1.5 md:py-2.5 rounded-2xl font-semibold text-[10px] md:text-xs transition-all text-slate-400 hover:text-emerald-300 hover:bg-slate-900/80 border border-transparent flex-1 md:flex-none">
-          <i class="fa-solid fa-chart-pie text-base md:w-5 text-center text-emerald-400"></i>
+        <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="nav-item btn-press flex items-center justify-start gap-3 px-3 py-2.5 rounded-2xl font-semibold text-xs transition-all text-slate-400 hover:text-emerald-300 hover:bg-slate-900/80 border border-transparent">
+          <i class="fa-solid fa-chart-pie text-base w-5 text-center text-emerald-400"></i>
           <span class="truncate">Auditoría & Cuadre</span>
         </button>
 
-        <button onclick="switchTab('ai')" id="tab-btn-ai" class="nav-item btn-press flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 px-3 py-1.5 md:py-2.5 rounded-2xl font-semibold text-[10px] md:text-xs transition-all text-slate-400 hover:text-fuchsia-300 hover:bg-slate-900/80 border border-transparent flex-1 md:flex-none">
-          <i class="fa-solid fa-brain text-base md:w-5 text-center text-fuchsia-400"></i>
+        <button onclick="switchTab('ai')" id="tab-btn-ai" class="nav-item btn-press flex items-center justify-start gap-3 px-3 py-2.5 rounded-2xl font-semibold text-xs transition-all text-slate-400 hover:text-fuchsia-300 hover:bg-slate-900/80 border border-transparent">
+          <i class="fa-solid fa-brain text-base w-5 text-center text-fuchsia-400"></i>
           <span class="truncate">Asistente Comercial</span>
         </button>
 
-        <button onclick="openMobileMoreMenu()" class="md:hidden flex flex-col items-center justify-center gap-1 px-3 py-1.5 rounded-2xl font-semibold text-[10px] text-slate-400 hover:text-white flex-1">
-          <i class="fa-solid fa-ellipsis text-base text-cyan-400"></i>
-          <span>Gestión</span>
-        </button>
-
-        <button onclick="requireAdminAuth('customers')" id="tab-btn-customers" class="hidden md:flex nav-item btn-press w-full items-center gap-3 px-3.5 py-2.5 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-900/80">
+        <button onclick="requireAdminAuth('customers')" id="tab-btn-customers" class="nav-item btn-press flex w-full items-center gap-3 px-3 py-2.5 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-900/80 border border-transparent">
           <i class="fa-solid fa-address-book text-base w-5 text-center text-indigo-400"></i>
           <span>Cartera de Clientes</span>
         </button>
 
-        <button onclick="requireAdminAuth('payment-settings')" id="tab-btn-payment-settings" class="hidden md:flex nav-item btn-press w-full items-center gap-3 px-3.5 py-2.5 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-900/80">
+        <button onclick="requireAdminAuth('payment-settings')" id="tab-btn-payment-settings" class="nav-item btn-press flex w-full items-center gap-3 px-3 py-2.5 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-900/80 border border-transparent">
           <i class="fa-solid fa-wallet text-base w-5 text-center text-amber-400"></i>
           <span>Canales de Recaudación</span>
         </button>
 
-        <button onclick="openCounterStandModal()" class="hidden md:flex nav-item btn-press w-full items-center gap-3 px-3.5 py-2.5 rounded-2xl font-semibold text-xs text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 border border-amber-500/20">
+        <button onclick="openCounterStandModal()" class="nav-item btn-press flex w-full items-center gap-3 px-3 py-2.5 rounded-2xl font-semibold text-xs text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 border border-amber-500/20">
           <i class="fa-solid fa-qrcode text-base w-5 text-center"></i>
           <span>Cartel QR Mostrador</span>
         </button>
 
-        <button onclick="requireAdminAuth('saas-settings')" id="tab-btn-saas-settings" class="hidden md:flex nav-item btn-press w-full items-center gap-3 px-3.5 py-2.5 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-900/80">
+        <button onclick="requireAdminAuth('saas-settings')" id="tab-btn-saas-settings" class="nav-item btn-press flex w-full items-center gap-3 px-3 py-2.5 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-900/80 border border-transparent">
           <i class="fa-solid fa-sliders text-base w-5 text-center text-slate-300"></i>
           <span>Configuración & SaaS</span>
         </button>
       </nav>
     </div>
 
-    <div class="hidden md:block p-3 border-t border-slate-800/80 bg-[#070b14] space-y-2">
+    <div class="p-3 border-t border-slate-800/80 bg-[#070b14] space-y-2">
       <div class="bg-gradient-to-br from-slate-900 to-indigo-950/60 rounded-2xl p-2.5 border border-indigo-500/30 shadow-lg">
         <div class="flex items-center justify-between text-[11px] text-slate-400 font-bold mb-1">
           <span class="flex items-center gap-1.5 text-amber-400"><i class="fa-solid fa-coins animate-spin-slow"></i> Tasa Cambiaria</span>
@@ -281,11 +284,15 @@
     </div>
   </aside>
 
-  <main class="order-1 md:order-2 flex-1 flex flex-col min-w-0 bg-[#070b14] overflow-hidden h-[calc(100vh-4rem)] md:h-full">
+  <main class="order-1 flex-1 flex flex-col min-w-0 bg-[#070b14] overflow-hidden h-[100dvh] relative">
     <header class="h-14 md:h-16 glass-panel-header px-3 md:px-6 flex items-center justify-between shrink-0 z-20">
       <div class="flex items-center gap-2.5 min-w-0">
-        <div class="md:hidden w-8 h-8 rounded-xl bg-[#0c1222] border border-indigo-500/40 p-1 flex items-center justify-center shadow-md shadow-indigo-500/30 shrink-0 overflow-hidden">
-          <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain">
+        <div class="md:hidden w-8 h-8 rounded-xl bg-[#0c1222] border border-indigo-500/40 p-1 flex items-center justify-center shadow-md shadow-indigo-500/30 shrink-0">
+          <svg viewBox="0 0 100 100" class="w-full h-full">
+            <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="#00f2fe" stroke-width="7" stroke-dasharray="14 8" stroke-linecap="round"/>
+            <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="#00f2fe"/>
+          </svg>
         </div>
         <div class="min-w-0">
           <h2 id="view-title" class="text-sm md:text-lg font-black text-white tracking-tight truncate flex items-center gap-2">
@@ -330,7 +337,7 @@
       </div>
     </header>
 
-    <div class="flex-1 relative overflow-hidden">
+    <div class="flex-1 relative overflow-hidden flex flex-col min-h-0">
 
       <section id="view-pos" class="h-full w-full flex flex-col md:flex-row overflow-hidden relative">
         <div class="md:hidden flex items-center justify-between bg-[#0a0f1d] text-white px-3 py-1.5 shrink-0 z-10 border-b border-slate-800">
@@ -353,15 +360,15 @@
           <div class="space-y-2 mb-2.5 shrink-0">
             <div class="relative w-full">
               <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-cyan-400 text-xs"></i>
-              <input type="text" id="pos-search" oninput="renderPOSCatalog()" placeholder="Filtrar por descripción o código de barras (F2)..." class="w-full pl-9 pr-3 py-2 bg-[#0c1222] border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-inner">
+              <input type="text" id="pos-search" oninput="renderPOSCatalog()" placeholder="Filtrar por descripción o código (F2)..." class="w-full pl-9 pr-3 py-2 bg-[#0c1222] border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-inner">
             </div>
             
-            <div class="w-full overflow-hidden">
-              <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar smooth-scroll-x py-0.5 px-0.5 w-full cursor-grab active:cursor-grabbing" id="category-pills"></div>
+            <div class="w-full">
+              <div class="flex items-center gap-1.5 touch-scroll-x py-1 px-0.5 w-full select-none" id="category-pills"></div>
             </div>
           </div>
 
-          <div class="flex-1 min-h-0 overflow-y-auto pr-0.5 pb-20 md:pb-2">
+          <div class="flex-1 min-h-0 touch-scroll-y pr-0.5 bottom-nav-safe md:pb-2">
             <div id="pos-products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-3"></div>
           </div>
         </div>
@@ -395,7 +402,7 @@
             </div>
           </div>
 
-          <div id="cart-items" class="flex-1 min-h-0 overflow-y-auto p-3 space-y-2"></div>
+          <div id="cart-items" class="flex-1 min-h-0 touch-scroll-y p-3 space-y-2"></div>
 
           <div class="p-3 border-t border-slate-800/80 bg-[#0c1222] space-y-1 shrink-0">
             <div class="flex justify-between items-center text-xs text-slate-400 font-medium">
@@ -421,7 +428,7 @@
             </div>
           </div>
 
-          <div class="p-3 border-t border-slate-800 bg-[#0a0f1d] space-y-2 shrink-0">
+          <div class="p-3 border-t border-slate-800 bg-[#0a0f1d] space-y-2 shrink-0 bottom-nav-safe md:bottom-nav-safe-none">
             <div class="flex items-center justify-between text-[10px] font-black text-slate-400 uppercase tracking-wider">
               <span class="flex items-center gap-1 text-amber-400"><i class="fa-solid fa-bolt"></i> Liquidación Directa:</span>
               <div class="flex items-center gap-2">
@@ -476,7 +483,7 @@
         </div>
       </section>
 
-      <section id="view-inventory" class="h-full hidden flex-col p-3 md:p-6 overflow-y-auto">
+      <section id="view-inventory" class="h-full hidden flex-col p-3 md:p-6 touch-scroll-y bottom-nav-safe">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2.5 mb-4">
           <div>
             <h3 class="text-base md:text-xl font-black text-white">Control Central de Inventario</h3>
@@ -511,7 +518,7 @@
           </div>
         </div>
 
-        <div class="glass-neon-card rounded-2xl overflow-hidden flex flex-col">
+        <div class="glass-neon-card rounded-2xl overflow-hidden flex flex-col mb-4">
           <div class="p-2.5 border-b border-slate-800 flex flex-col sm:flex-row gap-2 justify-between items-center bg-[#0c1222]">
             <div class="relative w-full sm:w-80">
               <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-cyan-400 text-xs"></i>
@@ -522,7 +529,7 @@
             </select>
           </div>
 
-          <div class="overflow-x-auto no-scrollbar smooth-scroll-x">
+          <div class="touch-scroll-x">
             <table class="w-full text-left text-xs text-slate-300 min-w-[580px]">
               <thead class="bg-slate-900/90 text-slate-400 font-bold uppercase border-b border-slate-800">
                 <tr>
@@ -541,7 +548,7 @@
         </div>
       </section>
 
-      <section id="view-credit-book" class="h-full hidden flex-col p-3 md:p-6 overflow-y-auto">
+      <section id="view-credit-book" class="h-full hidden flex-col p-3 md:p-6 touch-scroll-y bottom-nav-safe">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2.5 mb-4">
           <div>
             <h3 class="text-base md:text-xl font-black text-white">Gestión de Cuentas por Cobrar</h3>
@@ -559,13 +566,13 @@
           </div>
         </div>
 
-        <div class="glass-neon-card rounded-2xl overflow-hidden flex flex-col">
+        <div class="glass-neon-card rounded-2xl overflow-hidden flex flex-col mb-4">
           <div class="p-2.5 border-b border-slate-800 flex justify-between items-center bg-[#0c1222]">
             <h4 class="font-extrabold text-xs text-white">Titulares con Saldo Deudor</h4>
             <span class="text-[11px] text-slate-400 font-mono" id="credit-count-label">0 registros</span>
           </div>
 
-          <div class="overflow-x-auto no-scrollbar smooth-scroll-x">
+          <div class="touch-scroll-x">
             <table class="w-full text-left text-xs text-slate-300 min-w-[580px]">
               <thead class="bg-slate-900/90 text-slate-400 font-bold uppercase border-b border-slate-800">
                 <tr>
@@ -583,7 +590,7 @@
         </div>
       </section>
 
-      <section id="view-analytics" class="h-full hidden flex-col p-3 md:p-6 overflow-y-auto">
+      <section id="view-analytics" class="h-full hidden flex-col p-3 md:p-6 touch-scroll-y bottom-nav-safe">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2.5 mb-4">
           <div>
             <h3 class="text-base md:text-xl font-black text-white">Auditoría Comercial & Cuadre de Turno</h3>
@@ -625,13 +632,13 @@
           </div>
         </div>
 
-        <div class="glass-neon-card rounded-2xl overflow-hidden flex flex-col">
+        <div class="glass-neon-card rounded-2xl overflow-hidden flex flex-col mb-4">
           <div class="p-2.5 border-b border-slate-800 flex justify-between items-center bg-[#0c1222]">
             <h4 class="font-extrabold text-xs text-white">Registro Histórico de Tickets</h4>
             <span class="text-[11px] text-cyan-400 font-mono" id="sales-history-counter">0 registros</span>
           </div>
 
-          <div class="overflow-x-auto max-h-96 no-scrollbar smooth-scroll-x">
+          <div class="touch-scroll-x max-h-96">
             <table class="w-full text-left text-xs text-slate-300 min-w-[550px]">
               <thead class="bg-slate-900/90 text-slate-400 font-bold uppercase sticky top-0 border-b border-slate-800">
                 <tr>
@@ -650,7 +657,7 @@
         </div>
       </section>
 
-      <section id="view-customers" class="h-full hidden flex-col p-3 md:p-6 overflow-y-auto">
+      <section id="view-customers" class="h-full hidden flex-col p-3 md:p-6 touch-scroll-y bottom-nav-safe">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2.5 mb-4">
           <div>
             <h3 class="text-base md:text-xl font-black text-white">Cartera de Clientes</h3>
@@ -661,15 +668,15 @@
           </button>
         </div>
 
-        <div class="glass-neon-card rounded-2xl overflow-hidden flex flex-col">
+        <div class="glass-neon-card rounded-2xl overflow-hidden flex flex-col mb-4">
           <div class="p-2.5 border-b border-slate-800 flex gap-2 items-center bg-[#0c1222]">
             <div class="relative flex-1">
               <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-cyan-400 text-xs"></i>
-              <input type="text" id="cust-filter-search" oninput="renderCustomersTable()" placeholder="Buscar por nombre, documento de identidad o número telefónico..." class="w-full pl-9 pr-3 py-1.5 bg-[#070b14] border border-slate-800 rounded-xl text-xs text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+              <input type="text" id="cust-filter-search" oninput="renderCustomersTable()" placeholder="Buscar por nombre, documento o teléfono..." class="w-full pl-9 pr-3 py-1.5 bg-[#070b14] border border-slate-800 rounded-xl text-xs text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none">
             </div>
           </div>
 
-          <div class="overflow-x-auto no-scrollbar smooth-scroll-x">
+          <div class="touch-scroll-x">
             <table class="w-full text-left text-xs text-slate-300 min-w-[550px]">
               <thead class="bg-slate-900/90 text-slate-400 font-bold uppercase border-b border-slate-800">
                 <tr>
@@ -687,7 +694,7 @@
         </div>
       </section>
 
-      <section id="view-payment-settings" class="h-full hidden flex-col p-3 md:p-6 overflow-y-auto">
+      <section id="view-payment-settings" class="h-full hidden flex-col p-3 md:p-6 touch-scroll-y bottom-nav-safe">
         <div class="max-w-3xl mx-auto w-full space-y-3 pb-8">
           <div class="glass-neon-card rounded-2xl p-4 flex justify-between items-center">
             <div>
@@ -763,7 +770,7 @@
         </div>
       </section>
 
-      <section id="view-ai" class="h-full hidden flex-col p-3 md:p-6 overflow-y-auto">
+      <section id="view-ai" class="h-full hidden flex-col p-3 md:p-6 touch-scroll-y bottom-nav-safe">
         <div class="max-w-3xl mx-auto w-full space-y-3 pb-8">
           <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 rounded-2xl p-4 md:p-5 text-white shadow-xl border border-indigo-500/30">
             <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-cyan-300 text-[10px] font-bold mb-1.5 border border-indigo-400/30">
@@ -786,7 +793,7 @@
           </div>
 
           <div class="glass-neon-card rounded-2xl p-3 md:p-4 space-y-2.5">
-            <div id="ai-chat-box" class="h-64 overflow-y-auto p-3 bg-[#070b14] rounded-xl border border-slate-800 space-y-2.5 text-xs">
+            <div id="ai-chat-box" class="h-64 touch-scroll-y p-3 bg-[#070b14] rounded-xl border border-slate-800 space-y-2.5 text-xs">
               <div class="flex gap-2">
                 <div class="w-7 h-7 rounded-xl bg-gradient-to-tr from-indigo-600 to-fuchsia-600 text-white flex items-center justify-center text-xs shrink-0 font-black shadow-md shadow-indigo-500/30">
                   <i class="fa-solid fa-brain"></i>
@@ -798,7 +805,7 @@
             </div>
 
             <form onsubmit="handleAIChatSubmit(event)" class="flex gap-1.5">
-              <input type="text" id="ai-user-prompt" placeholder="Realizar consulta sobre stock, precios sugeridos o recaudación..." class="flex-1 px-3 py-2 bg-[#070b14] border border-slate-800 rounded-xl text-xs font-medium text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+              <input type="text" id="ai-user-prompt" placeholder="Realizar consulta sobre stock o precios..." class="flex-1 px-3 py-2 bg-[#070b14] border border-slate-800 rounded-xl text-xs font-medium text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none">
               <button type="submit" id="ai-send-btn" class="px-3.5 py-2 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-md shadow-indigo-600/30">
                 <i class="fa-solid fa-paper-plane"></i>
               </button>
@@ -807,7 +814,7 @@
         </div>
       </section>
 
-      <section id="view-saas-settings" class="h-full hidden flex-col p-3 md:p-6 overflow-y-auto">
+      <section id="view-saas-settings" class="h-full hidden flex-col p-3 md:p-6 touch-scroll-y bottom-nav-safe">
         <div class="max-w-3xl mx-auto w-full space-y-3 pb-8">
           <div class="bg-gradient-to-r from-indigo-950 via-slate-900 to-purple-950 text-white rounded-2xl p-4 shadow-xl border border-indigo-500/30 flex justify-between items-center gap-3">
             <div>
@@ -879,6 +886,38 @@
       </section>
 
     </div>
+
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#0a0f1d]/95 backdrop-blur-xl border-t border-slate-800 z-40 flex items-center justify-around px-2 py-1.5 pb-[calc(0.4rem+env(safe-area-inset-bottom,0px))] shadow-2xl">
+      <button onclick="switchTab('pos')" id="mobile-nav-pos" class="flex flex-col items-center justify-center gap-1 py-1 px-2.5 rounded-xl text-[10px] font-bold text-cyan-400">
+        <i class="fa-solid fa-cash-register text-base text-amber-300"></i>
+        <span>Terminal</span>
+      </button>
+
+      <button onclick="requireAdminAuth('inventory')" id="mobile-nav-inventory" class="flex flex-col items-center justify-center gap-1 py-1 px-2.5 rounded-xl text-[10px] font-semibold text-slate-400">
+        <i class="fa-solid fa-layer-group text-base text-cyan-400"></i>
+        <span>Inventario</span>
+      </button>
+
+      <button onclick="requireAdminAuth('credit-book')" id="mobile-nav-credit-book" class="flex flex-col items-center justify-center gap-1 py-1 px-2.5 rounded-xl text-[10px] font-semibold text-slate-400">
+        <i class="fa-solid fa-file-invoice-dollar text-base text-rose-400"></i>
+        <span>Cuentas</span>
+      </button>
+
+      <button onclick="switchTab('analytics')" id="mobile-nav-analytics" class="flex flex-col items-center justify-center gap-1 py-1 px-2.5 rounded-xl text-[10px] font-semibold text-slate-400">
+        <i class="fa-solid fa-chart-pie text-base text-emerald-400"></i>
+        <span>Cuadre</span>
+      </button>
+
+      <button onclick="switchTab('ai')" id="mobile-nav-ai" class="flex flex-col items-center justify-center gap-1 py-1 px-2.5 rounded-xl text-[10px] font-semibold text-slate-400">
+        <i class="fa-solid fa-brain text-base text-fuchsia-400"></i>
+        <span>Asistente</span>
+      </button>
+
+      <button onclick="openMobileMoreMenu()" class="flex flex-col items-center justify-center gap-1 py-1 px-2.5 rounded-xl text-[10px] font-semibold text-slate-400">
+        <i class="fa-solid fa-ellipsis text-base text-indigo-400"></i>
+        <span>Más</span>
+      </button>
+    </nav>
   </main>
 
   <div id="modal-counter-stand" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden items-center justify-center p-3 overflow-y-auto">
@@ -892,8 +931,12 @@
 
       <div id="printable-counter-stand" class="p-4 border-2 border-dashed border-indigo-300 rounded-2xl bg-gradient-to-b from-indigo-50/50 to-white text-center space-y-3">
         <div class="flex items-center justify-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-white border border-slate-200 p-1 flex items-center justify-center shadow-sm shrink-0 overflow-hidden">
-            <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain">
+          <div class="w-10 h-10 rounded-2xl bg-slate-950 border border-slate-800 p-1 flex items-center justify-center shadow-sm shrink-0">
+            <svg viewBox="0 0 100 100" class="w-full h-full">
+              <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="#00f2fe" stroke-width="6" stroke-dasharray="14 8" stroke-linecap="round"/>
+              <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="#00f2fe"/>
+            </svg>
           </div>
           <h2 class="font-black text-lg text-slate-900" id="stand-business-name">NEGOCIOS | TERMINAL COMERCIAL</h2>
         </div>
@@ -938,7 +981,7 @@
   </div>
 
   <div id="modal-mobile-more" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-[#0c1222] border border-slate-800 rounded-t-3xl sm:rounded-3xl w-full max-w-sm p-4 space-y-3 animate-slideUp text-white">
+    <div class="bg-[#0c1222] border border-slate-800 rounded-t-3xl sm:rounded-3xl w-full max-w-sm p-4 space-y-3 text-white pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <h4 class="font-black text-white text-sm flex items-center gap-2">
           <i class="fa-solid fa-sliders text-cyan-400"></i> Módulos de Gestión
@@ -948,7 +991,7 @@
         </button>
       </div>
 
-      <div class="space-y-1.5 text-xs font-bold">
+      <div class="space-y-1 text-xs font-bold">
         <button onclick="closeMobileMoreMenu(); openExpenseModal();" class="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-800 text-amber-300">
           <i class="fa-solid fa-hand-holding-dollar text-amber-400 w-5"></i>
           <span>Registrar Salida de Caja</span>
@@ -1036,8 +1079,12 @@
 
   <div id="modal-lock-screen" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-50 hidden items-center justify-center p-4">
     <div class="text-center space-y-3 max-w-xs w-full">
-      <div class="w-14 h-14 rounded-2xl bg-[#0c1222] border border-indigo-500/50 p-2 mx-auto flex items-center justify-center shadow-lg shadow-indigo-500/40 animate-pulse overflow-hidden">
-        <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain">
+      <div class="w-14 h-14 rounded-2xl bg-[#0c1222] border border-indigo-500/50 p-2 mx-auto flex items-center justify-center shadow-lg shadow-indigo-500/40 animate-pulse">
+        <svg viewBox="0 0 100 100" class="w-full h-full">
+          <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="#00f2fe" stroke-width="6" stroke-dasharray="14 8"/>
+          <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="5"/>
+          <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="#00f2fe"/>
+        </svg>
       </div>
       <div>
         <h3 class="text-lg font-black text-white">Terminal Protegida</h3>
@@ -1052,8 +1099,12 @@
 
   <div id="modal-receipt" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden items-center justify-center p-3 overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-sm w-full p-4 shadow-2xl border border-slate-100 my-4 text-center">
-      <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 p-1.5 mx-auto flex items-center justify-center mb-1 overflow-hidden">
-        <img src="http://lemustech.net/imagenes/imagen4.png" alt="Logo" class="w-full h-full object-contain">
+      <div class="w-12 h-12 rounded-2xl bg-slate-950 border border-slate-800 p-1.5 mx-auto flex items-center justify-center mb-1">
+        <svg viewBox="0 0 100 100" class="w-full h-full">
+          <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15 Z" fill="none" stroke="#00f2fe" stroke-width="6" stroke-dasharray="14 8"/>
+          <path d="M30 40 L40 40 L48 65 L68 65 L74 46 L38 46" fill="none" stroke="#ffffff" stroke-width="5"/>
+          <path d="M36 28 L20 54 L34 54 L24 76 L52 46 L36 46 Z" fill="#00f2fe"/>
+        </svg>
       </div>
       <h4 class="font-black text-slate-800 text-sm">Operación Procesada</h4>
       <p class="text-[10px] text-slate-400" id="receipt-subtitle-text">Registro validado mediante sello criptográfico</p>
@@ -1507,10 +1558,6 @@
       plan: 'Corporativo Pro',
       expiryDate: null
     };
-
-    function getTenantPath(collectionName) {
-      return `negocios/${currentTenantId}/${collectionName}`;
-    }
 
     const CryptoGuard = {
       async sha256(str) {
@@ -1994,19 +2041,13 @@
     let deferredPrompt = null;
 
     function initPWASupport() {
-      const logoUrl = "http://lemustech.net/imagenes/imagen4.png";
       const manifest = {
         name: "NegociOS Pro",
         short_name: "NegociOS",
         start_url: window.location.href,
         display: "standalone",
         background_color: "#070b14",
-        theme_color: "#6366f1",
-        icons: [
-          { src: logoUrl, sizes: "192x192", type: "image/png" },
-          { src: logoUrl, sizes: "512x512", type: "image/png" },
-          { src: logoUrl, sizes: "any", type: "image/png" }
-        ]
+        theme_color: "#6366f1"
       };
       const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
       const link = document.createElement('link');
@@ -2033,43 +2074,8 @@
           deferredPrompt = null;
         });
       } else {
-        showNotification('Dispositivo iOS: Seleccione Compartir > Añadir a pantalla de inicio');
+        showNotification('En iPhone: Pulsa Compartir > "Añadir a pantalla de inicio"');
       }
-    }
-
-    function setupHorizontalScrolls() {
-      const containers = document.querySelectorAll('.smooth-scroll-x, .overflow-x-auto, #category-pills');
-
-      containers.forEach(el => {
-        if (!el) return;
-
-        el.addEventListener('wheel', (evt) => {
-          if (Math.abs(evt.deltaX) > Math.abs(evt.deltaY)) return;
-          if (evt.deltaY !== 0) {
-            evt.preventDefault();
-            el.scrollLeft += evt.deltaY * 1.2;
-          }
-        }, { passive: false });
-
-        let isDown = false;
-        let startX, scrollLeft;
-
-        el.addEventListener('mousedown', (e) => {
-          isDown = true;
-          el.classList.add('cursor-grabbing');
-          startX = e.pageX - el.offsetLeft;
-          scrollLeft = el.scrollLeft;
-        });
-
-        el.addEventListener('mouseleave', () => { isDown = false; el.classList.remove('cursor-grabbing'); });
-        el.addEventListener('mouseup', () => { isDown = false; el.classList.remove('cursor-grabbing'); });
-        el.addEventListener('mousemove', (e) => {
-          if (!isDown) return;
-          e.preventDefault();
-          const x = e.pageX - el.offsetLeft;
-          el.scrollLeft = scrollLeft - (x - startX) * 1.5;
-        });
-      });
     }
 
     function setupKeyboardShortcuts() {
@@ -2116,7 +2122,6 @@
       updateCartUI();
       renderInventoryTable();
       updateAnalyticsUI();
-      setupHorizontalScrolls();
 
       initFirebaseClient();
     };
@@ -2316,6 +2321,7 @@
       views.forEach(v => {
         const viewEl = document.getElementById(`view-${v}`);
         const btnEl = document.getElementById(`tab-btn-${v}`);
+        const mBtnEl = document.getElementById(`mobile-nav-${v}`);
         if (viewEl) {
           if (v === tabId) {
             viewEl.classList.remove('hidden');
@@ -2327,9 +2333,16 @@
         }
         if (btnEl) {
           if (v === tabId) {
-            btnEl.className = 'nav-item btn-press flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 px-3 py-1.5 md:py-2.5 rounded-2xl font-bold text-[10px] md:text-xs transition-all bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-lg shadow-indigo-600/40 flex-1 md:flex-none border border-indigo-400/30';
+            btnEl.className = 'nav-item btn-press flex items-center justify-start gap-3 px-3 py-2.5 rounded-2xl font-bold text-xs transition-all bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-lg shadow-indigo-600/40 border border-indigo-400/30';
           } else {
-            btnEl.className = 'nav-item btn-press flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 px-3 py-1.5 md:py-2.5 rounded-2xl font-semibold text-[10px] md:text-xs transition-all text-slate-400 hover:text-white hover:bg-slate-900/80 border border-transparent flex-1 md:flex-none';
+            btnEl.className = 'nav-item btn-press flex items-center justify-start gap-3 px-3 py-2.5 rounded-2xl font-semibold text-xs transition-all text-slate-400 hover:text-white hover:bg-slate-900/80 border border-transparent';
+          }
+        }
+        if (mBtnEl) {
+          if (v === tabId) {
+            mBtnEl.className = 'flex flex-col items-center justify-center gap-1 py-1 px-2.5 rounded-xl text-[10px] font-bold text-cyan-400';
+          } else {
+            mBtnEl.className = 'flex flex-col items-center justify-center gap-1 py-1 px-2.5 rounded-xl text-[10px] font-semibold text-slate-400';
           }
         }
       });
@@ -2343,7 +2356,6 @@
       if (tabId === 'analytics') updateAnalyticsUI();
       if (tabId === 'customers') renderCustomersTable();
       if (tabId === 'saas-settings') updateLicenseUI();
-      setTimeout(setupHorizontalScrolls, 100);
     }
 
     function renderPOSCategoryPills() {
@@ -2355,7 +2367,7 @@
         const isSelected = currentCategory === cat;
         const label = cat === 'ALL' ? 'Todos los Rubros' : cat;
         return `
-          <button onclick="setCategoryFilter('${cat}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap shrink-0 ${
+          <button type="button" onclick="setCategoryFilter('${cat}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap shrink-0 active:scale-95 ${
             isSelected ? 'bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 text-white shadow-md shadow-indigo-500/30 border border-cyan-400/30' : 'bg-[#0c1222] text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-white'
           }">
             ${label}
@@ -2367,8 +2379,6 @@
         selectInv.innerHTML = '<option value="ALL">Todas las Categorías</option>' + 
           categories.filter(c => c !== 'ALL').map(c => `<option value="${c}">${c}</option>`).join('');
       }
-
-      setupHorizontalScrolls();
     }
 
     function setCategoryFilter(cat) {
